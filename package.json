@@ -1,0 +1,30 @@
+{
+  "name": "node-ts",
+  "version": "1.0.0",
+  "description": "A NodeJS backend with typescript.",
+  "main": "index.js",
+  "scripts": {
+    "start": "ts-node ./src/index.ts",
+    "dev": "ts-node-dev --respawn ./src/index.ts"
+  },
+  "keywords": [
+    "node-ts",
+    "node-express",
+    "node-express-typescript"
+  ],
+  "author": "Sefat Anam",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.14",
+    "@types/node": "^18.11.7",
+    "concurrently": "^7.5.0",
+    "nodemon": "^2.0.20",
+    "ts-node": "^10.9.1",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^4.8.4"
+  }
+}
