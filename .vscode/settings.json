@@ -1,0 +1,13 @@
+{
+    "files.autoSave": "off",
+    "workbench.activityBar.visible": true,
+    "sqltools.useNodeRuntime": true,
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "database": "${workspaceFolder:node-ts}/prisma/dev.db",
+            "name": "Prisma-ts"
+        }
+    ]
+}
