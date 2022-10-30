@@ -1,9 +1,11 @@
 import express, { NextFunction, Response, Request, Router, Express } from 'express';
+import { SaveUser } from '../services/users.service';
 
 const router = express.Router();
 
 router.get("/", async (req: Request, res: Response, next: NextFunction) => {
-    res.send("User Controller Execute");
+    const result = await SaveUser();
+    res.send(result);
 })
 
 
