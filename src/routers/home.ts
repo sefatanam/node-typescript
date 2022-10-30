@@ -3,6 +3,7 @@ import express, { NextFunction, Response, Request, Router, Express } from 'expre
 const router = express.Router();
 
 router.get("/", async (req: Request, res: Response, next: NextFunction) => {
+    
     res.send("Home Controller Execute");
 })
 
