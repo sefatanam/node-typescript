@@ -3,15 +3,12 @@ import environment from './config/environment';
 import express, { Express } from 'express';
 import { routes } from './extensions/routes';
 import { baseExtensions } from './extensions/base.extension';
-
 const app: Express = express();
-
 /**
  * App Builder Installation
  */
 baseExtensions(app)
 routes(app);
-
 
 /**
  * Running Node App
