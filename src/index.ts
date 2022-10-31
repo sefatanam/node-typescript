@@ -1,21 +1,21 @@
 import 'express-async-errors';
 import environment from './config/environment';
-import errorHandler from './middleware/errorHandler';
 import express, { Express } from 'express';
-import helmet from 'helmet';
-import logger from './startup/logger';
-import morgan from 'morgan';
-import routes from './startup/routes'; 
+import { routes } from './extensions/routes';
+import { baseExtensions } from './extensions/base.extension';
 
 const app: Express = express();
 
-app.use(express.json())
-app.use(helmet());
-app.use(morgan('combined'))
-routes(app); 
-logger();
-app.use(errorHandler);
+/**
+ * App Builder Installation
+ */
+baseExtensions(app)
+routes(app);
 
+
+/**
+ * Running Node App
+ */
 app.listen(environment()?.port, () => {
     console.log(`⚡️[server]: Server is running at https://localhost:${environment()?.port}`);
 });
