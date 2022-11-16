@@ -1,5 +1,7 @@
 
-import { IsEmail, MaxLength, Min, MinLength } from 'class-validator';
+import { IsEmail, MaxLength, MinLength } from 'class-validator';
+import * as jwt from 'jsonwebtoken';
+import { environment } from '../config/environment';
 
 export class UserDto {
     @MinLength(4, { message: "Username should be 4 character minimum" })
@@ -8,4 +10,17 @@ export class UserDto {
 
     @IsEmail()
     email!: string;
+
+    @MinLength(11, { message: 'Contact number should be exact 11 characters' })
+    contactNo!: string;
+
+    @MinLength(4, { message: "Password should be 4 character minimum" })
+    password!: string;
+
+    generateAuthToken() {
+        const token = jwt.sign({ email: this.email }, environment.JWT_TOKEN_KEY);
+        return token;
+    }
+
+
 }

@@ -11,6 +11,6 @@ export default function () {
         winston.error(exception.message.concat(new Date().toLocaleDateString()));
     })
     winston.add(new winston.transports.File({ filename: 'logs/logfile.log' }))
-    // winston.add(new winston.transports.MongoDB({ db: environment().winstonConnectionString }))
+    // winston.add(new winston.transports.MongoDB({ db: environment.winstonConnectionString }))
 
 }
