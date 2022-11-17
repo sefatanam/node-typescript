@@ -1,6 +1,6 @@
 import 'express-async-errors'; 
 import express, { Express } from 'express';
-import { routes } from './extensions/routes';
+import { routes } from './routes';
 import { customMiddleware } from './middleware/custom.middleware';
 import { environment } from './config/environment';
 const app: Express = express();

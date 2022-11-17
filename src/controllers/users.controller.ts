@@ -1,6 +1,6 @@
-import { RegisterUser, SaveUser, UserDtoWithToken } from '../services/users.service';
+import { RegisterUser, SaveUser } from '../services/users.service';
 import express, { NextFunction, Response, Request } from 'express';
-import { UserDto } from '../DTOs/user.dto';
+import { UserResponse } from '../Domain/Response/user.response';
 
 const router = express.Router();
 
@@ -11,17 +11,10 @@ router.get("/", async (req: Request, res: Response, _: NextFunction) => {
 
 router.post("/", async (req: Request, res: Response, _: NextFunction) => {
     const [status, result] = await RegisterUser(req);
-    // @ts-ignore
-    res.header('x-auth-token',result['token'])
+    if (result instanceof UserResponse) {
+        res.header('x-auth-token', result.token)
+    } 
     res.status(status).send(result);
 })
-
-
-
-
-
-
-
-
 
 export default router;
