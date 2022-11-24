@@ -1,7 +1,2 @@
-//@ts-ignore
-export class UserResponse {
-    username!: string;
-    email!: string;
-    contactNo!: string;
-    token!: string;
-}
+import { User } from "@prisma/client";
+export type UserResponse = Omit<User, 'password' | 'id'> & { token: string }

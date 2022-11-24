@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, User } from "@prisma/client";
 import { plainToClass } from "class-transformer";
 import { UserRequest } from "../Domain/Request/user.request";
 import { Request } from 'express';
@@ -10,23 +10,10 @@ import { LoginRequest } from "../Domain/Request/login.request";
 
 const prisma = new PrismaClient();
 
-async function GetUser(email: string) {
-    const user = await prisma.user.findFirst({
-        where: { email }
-    })
-    return user;
-}
+const GetUser = async (email: string): Promise<User | null> => await prisma.user.findFirst({ where: { email } })
+const CreateUser = async (data: UserRequest): Promise<User> => await prisma.user.create({ data })
 
-async function CreateUser(user: UserRequest) {
-    const result = await prisma.user.create({
-        data: user
-    })
-    return result;
-}
-/**
- * Here is problem with type #2
- */
-export async function RegisterUser(request: Request): Promise<[number, UserResponse | { message: any }]> {
+export const RegisterUser = async (request: Request): Promise<[number, UserResponse | { message: any }]> => {
     let userRequest = plainToClass(UserRequest, request.body);
     let errors = await validate(userRequest);
 
@@ -42,7 +29,7 @@ export async function RegisterUser(request: Request): Promise<[number, UserRespo
     userRequest.password = await bcrypt.hash(userRequest.password, salt);
 
     const newUser = await CreateUser(userRequest);
-    if (newUser) {
+    if (newUser.id) {
         const token = await generateAuthToken(userRequest.email);
         return [200, { ...userRequest, token }];
     }
@@ -50,7 +37,7 @@ export async function RegisterUser(request: Request): Promise<[number, UserRespo
 }
 
 
-export async function LoginUser(request: Request): Promise<[number, string | { message: any }]> {
+export const LoginUser = async (request: Request): Promise<[number, { token: string } | { message: any }]> => {
     let loginRequest = plainToClass(LoginRequest, request.body);
     let errors = await validate(loginRequest);
     if (errors.length) {
@@ -62,14 +49,8 @@ export async function LoginUser(request: Request): Promise<[number, string | { m
     }
 
     let validatePassword = await bcrypt.compare(loginRequest.password, user.password);
-    if (!validatePassword) return [400, "Invalid email or password."];
-    
+    if (!validatePassword) return [400, { message: "Invalid email or password." }];
+
     const token = await generateAuthToken(user.email);
-    return [200, token];
+    return [200, { token }];
 }
-
-
-
-
-
-
