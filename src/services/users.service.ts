@@ -1,12 +1,14 @@
-import { PrismaClient, User } from "@prisma/client";
-import { plainToClass } from "class-transformer";
-import { UserRequest } from "../Domain/Request/user.request";
+import * as bcrypt from 'bcrypt';
+import { generateAuthToken } from './common/auth.service';
+import { LoginRequest } from '../Domain/Request/login.request';
+import { plainToClass } from 'class-transformer';
+import { PrismaClient, User } from '@prisma/client';
 import { Request } from 'express';
-import { validate } from "class-validator";
-import * as bcrypt from "bcrypt";
-import { UserResponse } from "../Domain/Response/user.response";
-import { generateAuthToken } from "./common/auth.service";
-import { LoginRequest } from "../Domain/Request/login.request";
+import { UserRequest } from '../Domain/Request/user.request';
+import { UserResponse } from '../Domain/Response/user.response';
+import { validate } from 'class-validator';
+
+
 
 const prisma = new PrismaClient();
 

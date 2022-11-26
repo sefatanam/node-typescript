@@ -2,10 +2,12 @@
   "name": "node-ts",
   "version": "1.0.0",
   "description": "A NodeJS backend with typescript.",
-  "main": "index.js",
+  "main": "src/index.ts",
   "scripts": {
     "start": "ts-node ./src/index.ts",
-    "dev": "ts-node-dev --respawn  --transpile-only --exit-child --watch src ./src/index.ts"
+    "dev": "ts-node-dev --respawn  --transpile-only --exit-child --watch src ./src/index.ts",
+    "test:not-working": "ts-mocha --paths -p tests/ tests/**/*.spec.ts",
+    "test": "NODE_ENV=test mocha --check-leaks -r tsconfig-paths/register -r ts-node/register \"tests/**/*.spec.ts\""
   },
   "keywords": [
     "node-ts",
@@ -29,16 +31,28 @@
     "lodash": "^4.17.21",
     "morgan": "^1.10.0",
     "sqlite3": "^5.1.2",
+    "ts-mocha": "^10.0.0",
     "winston": "^3.8.2"
   },
   "devDependencies": {
+    "@types/chai": "^4.3.4",
+    "@types/expect": "^24.3.0",
     "@types/express": "^4.17.14",
+    "@types/jest": "^29.2.3",
+    "@types/mocha": "^10.0.0",
     "@types/morgan": "^1.9.3",
     "@types/node": "^18.11.7",
     "@types/sqlite3": "^3.1.8",
+    "@types/supertest": "^2.0.12",
+    "chai": "^4.3.7",
+    "jest": "^29.3.1",
+    "mocha": "^10.1.0",
     "prisma": "^4.5.0",
+    "supertest": "^6.3.1",
+    "ts-jest": "^29.0.3",
     "ts-node": "^10.9.1",
     "ts-node-dev": "^2.0.0",
+    "tsconfig-paths": "^4.1.0",
     "typescript": "^4.8.4"
   }
 }

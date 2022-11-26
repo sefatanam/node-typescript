@@ -1,8 +1,9 @@
+import express, { Express } from 'express';
 import helmet from 'helmet';
 import homeController from './controllers/home.controller';
-import morgan from 'morgan';  
+import morgan from 'morgan';
 import userController from './controllers/users.controller';
-import express ,{ Express } from 'express'
+
 
 export const routes =(app: Express) =>{
     app.use(express.json())

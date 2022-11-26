@@ -1,8 +1,11 @@
-import 'express-async-errors'; 
 import express, { Express } from 'express';
-import { routes } from './routes';
 import { customMiddleware } from './middleware/custom.middleware';
 import { environment } from './config/environment';
+import { routes } from './routes';
+import 'express-async-errors';
+
+
+
 const app: Express = express();
 /**
  * App Builder Installation

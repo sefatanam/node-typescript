@@ -1,5 +1,7 @@
+import express, { Request, Response } from 'express';
 import { LoginUser, RegisterUser } from '../services/users.service';
-import express, { Response, Request } from 'express';
+
+
 const router = express.Router();
 
 router.post("/register", async (req: Request, res: Response) => {
