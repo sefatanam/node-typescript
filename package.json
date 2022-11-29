@@ -7,7 +7,7 @@
     "start": "ts-node ./src/index.ts",
     "dev": "ts-node-dev --respawn  --transpile-only --exit-child --watch src ./src/index.ts",
     "test:not-working": "ts-mocha --paths -p tests/ tests/**/*.spec.ts",
-    "test": "NODE_ENV=test mocha --check-leaks -r tsconfig-paths/register -r ts-node/register \"tests/**/*.spec.ts\""
+    "test": "NODE_ENV=test mocha -w --check-leaks -r tsconfig-paths/register -r ts-node/register --watch-files \"tests/**/*.spec.ts\" \"tests/**/*.spec.ts\""
   },
   "keywords": [
     "node-ts",

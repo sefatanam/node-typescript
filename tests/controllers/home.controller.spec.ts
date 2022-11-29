@@ -1,7 +1,16 @@
+import { expect } from 'chai';
+import request from 'supertest';
 
+import createServer from '../../src/index';
 
-describe("Check Home Route", function () {
-    it("Yes, It now up and running..", () => {
-        console.log("Got it")
+const app = createServer();
+
+describe("[Controller] Home", function () {
+    
+    it("[GET] Default Route", (done) => {
+        request(app).get('/').expect(200).end((err, res) => {
+            expect(res.body.message).to.equal('Home Controller Execute');
+            done();
+        });
     })
 })
