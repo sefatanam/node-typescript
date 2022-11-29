@@ -1,19 +1,18 @@
-import 'express-async-errors'; 
-import express, { Express } from 'express';
-import { routes } from './routes';
-import { customMiddleware } from './middleware/custom.middleware';
+import 'express-async-errors';
+
+import express, { Application } from 'express';
+
 import { environment } from './config/environment';
-const app: Express = express();
-/**
- * App Builder Installation
- */
-routes(app);
-customMiddleware(app)
+import { customMiddleware } from './middleware/custom.middleware';
+import { routes } from './routes';
 
+export default function createServer() {
+    const app: Application = express();
+    routes(app);
+    customMiddleware(app)
+    return app;
+}
 
-/**
- * Running Node App
- */
-app.listen(environment.PORT, () => {
+createServer().listen(environment.PORT, () => {
     console.log(`⚡️[server]: Server is running at http://localhost:${environment.PORT}`);
 });

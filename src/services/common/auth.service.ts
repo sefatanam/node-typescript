@@ -1,6 +1,7 @@
-
 import * as jwt from 'jsonwebtoken';
 import { environment } from '../../config/environment';
+
+
 
 /**
  * Generate token using only registerd user email

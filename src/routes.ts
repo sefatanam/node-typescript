@@ -1,10 +1,11 @@
+import express, { Application, Express } from 'express';
 import helmet from 'helmet';
-import homeController from './controllers/home.controller';
-import morgan from 'morgan';  
-import userController from './controllers/users.controller';
-import express ,{ Express } from 'express'
+import morgan from 'morgan';
 
-export const routes =(app: Express) =>{
+import homeController from './controllers/home.controller';
+import userController from './controllers/users.controller';
+
+export const routes =(app: Application) =>{
     app.use(express.json())
     app.use(helmet());
     app.use(morgan('combined'))

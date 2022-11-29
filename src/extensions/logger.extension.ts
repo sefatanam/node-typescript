@@ -1,5 +1,4 @@
-
-import winston from "winston";
+import winston from 'winston';
 
 export default function () {
 

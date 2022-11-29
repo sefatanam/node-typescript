@@ -1,12 +1,15 @@
-import { PrismaClient, User } from "@prisma/client";
-import { plainToClass } from "class-transformer";
-import { UserRequest } from "../Domain/Request/user.request";
+import * as bcrypt from 'bcrypt';
+import { plainToClass } from 'class-transformer';
+import { validate } from 'class-validator';
 import { Request } from 'express';
-import { validate } from "class-validator";
-import * as bcrypt from "bcrypt";
-import { UserResponse } from "../Domain/Response/user.response";
-import { generateAuthToken } from "./common/auth.service";
-import { LoginRequest } from "../Domain/Request/login.request";
+
+import { PrismaClient, User } from '@prisma/client';
+
+import { LoginRequest } from '../Domain/Request/login.request';
+import { UserRequest } from '../Domain/Request/user.request';
+import { UserResponse } from '../Domain/Response/user.response';
+import { generateAuthToken } from './common/auth.service';
+import { ValidateRequest } from './common/valid-request.service';
 
 const prisma = new PrismaClient();
 
@@ -14,8 +17,7 @@ const GetUser = async (email: string): Promise<User | null> => await prisma.user
 const CreateUser = async (data: UserRequest): Promise<User> => await prisma.user.create({ data })
 
 export const RegisterUser = async (request: Request): Promise<[number, UserResponse | { message: any }]> => {
-    let userRequest = plainToClass(UserRequest, request.body);
-    let errors = await validate(userRequest);
+    const [userRequest, errors] = await ValidateRequest(UserRequest, request.body);
 
     if (errors.length) {
         return [400, { message: errors }];
@@ -38,8 +40,8 @@ export const RegisterUser = async (request: Request): Promise<[number, UserRespo
 
 
 export const LoginUser = async (request: Request): Promise<[number, { token: string } | { message: any }]> => {
-    let loginRequest = plainToClass(LoginRequest, request.body);
-    let errors = await validate(loginRequest);
+    const [loginRequest, errors] = await ValidateRequest(LoginRequest, request.body);
+    
     if (errors.length) {
         return [400, { message: errors }];
     }

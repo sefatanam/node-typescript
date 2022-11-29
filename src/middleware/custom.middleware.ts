@@ -1,9 +1,9 @@
-import { handleErrorMiddleware } from './error.middleware';
-import { Express } from 'express'
+import { Application } from 'express';
+
 import logger from '../extensions/logger.extension';
+import { handleErrorMiddleware } from './error.middleware';
 
-
-function customMiddleware(app: Express) { 
+function customMiddleware(app: Application) {
     app.use(handleErrorMiddleware);
     logger();
 }
