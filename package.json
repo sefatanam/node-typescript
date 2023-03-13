@@ -28,7 +28,7 @@
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.21",
     "morgan": "^1.10.0",
-    "sqlite3": "^5.1.2",
+    "sqlite3": "^5.1.5",
     "winston": "^3.8.2"
   },
   "devDependencies": {
